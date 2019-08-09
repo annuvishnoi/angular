@@ -1,0 +1,50 @@
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Post Title</span>
+            </div>
+            <input type="text" 
+              #name 
+              [(ngModel)]="selectedPost.title" 
+              (change)="0" 
+              class="form-control" 
+              placeholder="Enter Post Title" 
+              aria-label="Username" 
+              aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Body</span>
+              </div>
+              <input type="text" 
+                #summary 
+                [(ngModel)]="selectedPost.body" 
+                (change)="0" 
+                class="form-control" 
+                placeholder="Enter Post Body" 
+                aria-label="Username" 
+                aria-describedby="basic-addon1">
+          </div>
+
+          <button type="button" class="btn btn-primary" (click)="addPost(name.value, summary.value)" *ngIf="selectedKey == null">Add Post</button>
+          <button type="button" class="btn btn-info" (click)="updatePost(selectedPost)" *ngIf="selectedKey != null">Update Post</button>
+    </div>
+
+    <hr/>
+
+  
+  <div class="row">
+
+   
+   <div class="p-2 border" *ngFor="let post of posts; let i = index" [class.bg-dark]="post.id === selectedKey">
+      <my-card title={{post.title}} summary={{post.body}} key={{post.id}} (click)="onSelect(post.id)" (postDeleted)="handlePostDeletion($event)"></my-card>
+    </div>
+  </div>
+
+</div>
